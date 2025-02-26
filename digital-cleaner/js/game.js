@@ -177,9 +177,10 @@ window.onload = function() {
 
     const emailTypes = {
         normal: 4,
-        piece_jointe: 50,
+        piece_jointe: Math.random() * (50 - 10) + 10, // Génère un nombre entre 10 et 50
         spam: 0.3
     };
+    
 
     class PollutionGauge {
         constructor(maxCO2) {
@@ -227,8 +228,8 @@ window.onload = function() {
                 y: Math.random() * (canvas.height - 30),
                 width: 50,
                 height: 30,
-                dx: (Math.random() * 2) + 1,
-                dy: (Math.random() * 2) + 1,
+                dx: (Math.random() * 1) + 0.5, // Vitesse entre 0.5 et 1.5
+                dy: (Math.random() * 1) + 0.5, // Vitesse entre 0.5 et 1.5
                 type: randomType
             });
             totalEmails++;
@@ -237,7 +238,7 @@ window.onload = function() {
     }
 
     function init() {
-        setInterval(addEmailPopup, 1500);
+        setInterval(addEmailPopup, 2000);
         requestAnimationFrame(gameLoop);
     }
 
