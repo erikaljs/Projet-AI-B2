@@ -5,6 +5,8 @@ window.onload = function() {
     let mouseX = 0;
     let mouseY = 0;
 
+    let draggedEmail = null; // Email en cours de déplacement
+
     function drawTrashCan(x, y) {
         // Dessiner le corps de la poubelle
         ctx.fillStyle = '#e74c3c';
@@ -32,7 +34,15 @@ window.onload = function() {
         const rect = canvas.getBoundingClientRect();
         mouseX = event.clientX - rect.left;
         mouseY = event.clientY - rect.top;
-        isLidOpen = checkMouseOverTrashCan(100, 100, mouseX, mouseY);
+
+        // Si un email est en cours de déplacement, mettez-le à jour
+        if (draggedEmail) {
+            draggedEmail.x = mouseX - draggedEmail.width / 2;
+            draggedEmail.y = mouseY - draggedEmail.height / 2;
+        } else {
+            isLidOpen = checkMouseOverTrashCan(100, 100, mouseX, mouseY);
+        }
+
         draw();
     });
 
@@ -44,33 +54,31 @@ window.onload = function() {
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawTrashCan(100, 100);
-        // Dessiner tous les emails
+
         emailPopups.forEach(popup => {
-            if (popup.type === 'normal') {
-                ctx.fillStyle = 'blue';
-            } else if (popup.type === 'piece_jointe') {
-                ctx.fillStyle = 'red';
-            } else {
-                ctx.fillStyle = 'grey';
-            }
+            ctx.fillStyle = popup.type === 'normal' ? 'blue' : popup.type === 'piece_jointe' ? 'red' : 'grey';
             ctx.fillRect(popup.x, popup.y, popup.width, popup.height);
         });
-        // Dessiner la jauge de pollution
+
+        if (draggedEmail) {
+            ctx.fillStyle = draggedEmail.type === 'normal' ? 'blue' : draggedEmail.type === 'piece_jointe' ? 'red' : 'grey';
+            ctx.fillRect(draggedEmail.x, draggedEmail.y, draggedEmail.width, draggedEmail.height);
+        }
+
         pollutionGauge.draw(ctx);
     }
 
-    // Initialisation et ajout d'un email toutes les 1.5 secondes
     const emailPopups = [];
-    let score = 0; // Nombre d'emails supprimés
-    let totalCO2Deleted = 0; // Total de CO2 supprimé (en g)
+    let score = 0;
+    let totalCO2Deleted = 0;
     let gameOver = false;
-    let pollutionLevel = 0; // Niveau de pollution
-    const maxPollutionLevel = 200; // Niveau max ajusté
+    let pollutionLevel = 0;
+    const maxPollutionLevel = 200;
 
     const emailTypes = {
-        normal: 4,         // 4g CO2 pour un mail normal
-        piece_jointe: 50,  // 50g CO2 pour un mail avec pièce jointe
-        spam: 0.3          // 0.3g CO2 pour un spam
+        normal: 4,
+        piece_jointe: 50,
+        spam: 0.3
     };
 
     class PollutionGauge {
@@ -84,26 +92,19 @@ window.onload = function() {
         }
 
         update() {
-            // Calculer la pollution en fonction du type de mail
             this.co2 = emailPopups.reduce((total, email) => total + emailTypes[email.type], 0);
             this.level = Math.min((this.co2 / this.maxCO2) * this.width, this.width);
         }
 
         getColor() {
             const ratio = this.co2 / this.maxCO2;
-
-            // Plus la pollution augmente, plus la couleur devient rouge
-            if (ratio < 0.33) {
-                return 'green';  // Faible pollution, vert
-            } else if (ratio < 0.66) {
-                return 'yellow'; // Pollution modérée, jaune
-            } else {
-                return 'red';    // Forte pollution, rouge
-            }
+            if (ratio < 0.33) return 'green';
+            if (ratio < 0.66) return 'yellow';
+            return 'red';
         }
 
         draw(ctx) {
-            const color = this.getColor(); // Couleur dynamique selon le CO2
+            const color = this.getColor();
             ctx.fillStyle = color;
             ctx.fillRect(this.x, this.y, this.level, this.height);
             ctx.strokeStyle = 'white';
@@ -117,15 +118,13 @@ window.onload = function() {
     const pollutionGauge = new PollutionGauge(maxPollutionLevel);
 
     function init() {
-        // Ajout d'un email toutes les 1.5 secondes
-        setInterval(addEmailPopup, 1500); // Ajoute un email toutes les 1.5 secondes
+        setInterval(addEmailPopup, 1500);
         canvas.addEventListener('click', removeEmail);
         requestAnimationFrame(gameLoop);
     }
 
     function addEmailPopup() {
         if (!gameOver) {
-            // Choisir un type de mail aléatoire
             const randomType = ['normal', 'piece_jointe', 'spam'][Math.floor(Math.random() * 3)];
             emailPopups.push({
                 x: Math.random() * (canvas.width - 50),
@@ -134,52 +133,40 @@ window.onload = function() {
                 height: 30,
                 dx: (Math.random() * 2) + 1,
                 dy: (Math.random() * 2) + 1,
-                type: randomType // Assigner un type au mail
+                type: randomType
             });
         }
     }
 
     function removeEmail(event) {
-        const rect = canvas.getBoundingClientRect();
-        const mouseX = event.clientX - rect.left;
-        const mouseY = event.clientY - rect.top;
-
-        for (let i = 0; i < emailPopups.length; i++) {
-            const popup = emailPopups[i];
-            if (
-                mouseX >= popup.x && mouseX <= popup.x + popup.width &&
-                mouseY >= popup.y && mouseY <= popup.y + popup.height
-            ) {
-                // Ajouter la quantité de CO2 supprimée
-                totalCO2Deleted += emailTypes[popup.type];
-                emailPopups.splice(i, 1);
+        if (draggedEmail) {
+            // Vérifier si l'email est au-dessus de la poubelle
+            if (checkMouseOverTrashCan(100, 100, draggedEmail.x + draggedEmail.width / 2, draggedEmail.y + draggedEmail.height / 2)) {
+                totalCO2Deleted += emailTypes[draggedEmail.type];
+                emailPopups = emailPopups.filter(email => email !== draggedEmail);
                 score++;
                 document.getElementById("score").textContent = `Emails supprimés : ${score}`;
                 document.getElementById("co2-deleted").textContent = `CO₂ supprimé : ${totalCO2Deleted.toFixed(1)} g`;
-                return;
             }
+            draggedEmail = null; // Réinitialiser le mail en cours de déplacement
         }
     }
 
     function update() {
-        // Si la pollution atteint la limite, le jeu est terminé
         if (emailPopups.reduce((total, email) => total + emailTypes[email.type], 0) >= maxPollutionLevel) {
             gameOver = true;
             document.getElementById("game-over").style.display = "block";
             return;
         }
 
-        // Mettre à jour la position des emails
         emailPopups.forEach(popup => {
             popup.x += popup.dx;
             popup.y += popup.dy;
 
-            // Vérifier les bords du canvas pour inverser la direction des emails
             if (popup.x < 0 || popup.x + popup.width > canvas.width) popup.dx *= -1;
             if (popup.y < 0 || popup.y + popup.height > canvas.height) popup.dy *= -1;
         });
 
-        // Mettre à jour la jauge de pollution
         pollutionGauge.update();
     }
 
@@ -192,4 +179,36 @@ window.onload = function() {
     }
 
     init();
+
+    // Gestion du "drag" des emails
+    canvas.addEventListener("mousedown", (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+
+        for (let i = 0; i < emailPopups.length; i++) {
+            const popup = emailPopups[i];
+            if (
+                mouseX >= popup.x && mouseX <= popup.x + popup.width &&
+                mouseY >= popup.y && mouseY <= popup.y + popup.height
+            ) {
+                draggedEmail = popup; // Commencer à déplacer cet email
+                emailPopups.splice(i, 1); // Retirer l'email de la liste
+                break;
+            }
+        }
+    });
+
+    canvas.addEventListener("mouseup", () => {
+        if (draggedEmail) {
+            // Vérifier si l'email est au-dessus de la poubelle et le supprimer
+            if (checkMouseOverTrashCan(100, 100, draggedEmail.x + draggedEmail.width / 2, draggedEmail.y + draggedEmail.height / 2)) {
+                totalCO2Deleted += emailTypes[draggedEmail.type];
+                score++;
+                document.getElementById("score").textContent = `Emails supprimés : ${score}`;
+                document.getElementById("co2-deleted").textContent = `CO₂ supprimé : ${totalCO2Deleted.toFixed(1)} g`;
+            }
+            draggedEmail = null; // Réinitialiser le mail en cours de déplacement
+        }
+    });
 };
