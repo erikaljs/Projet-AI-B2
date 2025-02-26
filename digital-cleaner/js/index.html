@@ -20,17 +20,22 @@
         </canvas>
 <!-- Message de fin de jeu -->
 <div id="game-over" class="game-over-message" style="display: none;">
-    GAME OVER ! Essayez encore.
+    GAME OVER ! Essaie encore.
     <br>
     <!-- Bouton pour rejouer -->
     <button id="replayBtn">Rejouer</button>
     <!-- Bouton pour aller à une autre page -->
-    <button id="redirectBtn">Aller à une autre page</button>
+    <button id="redirectBtn">AGIR !</button>
 </div>
 
 
     
     <script src="popup.js"></script>
     <script src="game.js"></script>
+    <script>
+        document.getElementById('redirectBtn').addEventListener('click', function() {
+            window.location.href = 'https://www.gmail.com';
+        });
+    </script>
 </body>
 </html>
