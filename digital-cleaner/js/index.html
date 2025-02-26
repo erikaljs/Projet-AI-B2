@@ -5,29 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
     <title>Digital Cleaner Challenge</title>
-    
-</head>
-<body>
-    <title>Digital Cleaner Challenge</title>
-    <div id="co2-container">
-        <div id="co2-fill"></div>
-    </div>
-    <canvas id="gameCanvas" width="800" height="600"></canvas>
 
-    <!-- Conteneur pour les pop-ups -->
-    <div id="popup-container"></div>
-
-    <!-- Lien vers le fichier JavaScript -->
     <script src="popup.js"></script>
-
 </head>
 <body>
-    <h1>Digital Cleaner Challenge</h1>
-    <p id="score">Emails supprimés : 0</p>
-    <p id="co2-deleted">CO₂ supprimé : 0.0 g</p>
+    <div class="game-container">
+        <h1>Digital Cleaner Challenge</h1>
+        <p id="score">Emails supprimés : 0</p>
+        <p id="co2-deleted">CO₂ supprimé : 0.0 g</p>
 
-    <canvas id="gameCanvas" width="800" height="600"></canvas>
-    <p id="game-over">GAME OVER ! Essayez encore.</p>
+        <canvas id="gameCanvas" width="800" height="600">
+            <div id="popup-container"></div>
+        </canvas>
+<!-- Message de fin de jeu -->
+<div id="game-over" class="game-over-message" style="display: none;">
+    GAME OVER ! Essayez encore.
+    <br>
+    <!-- Bouton pour rejouer -->
+    <button id="replayBtn">Rejouer</button>
+    <!-- Bouton pour aller à une autre page -->
+    <button id="redirectBtn">Aller à une autre page</button>
+</div>
+
+
+    
+    <script src="popup.js"></script>
     <script src="game.js"></script>
 </body>
 </html>

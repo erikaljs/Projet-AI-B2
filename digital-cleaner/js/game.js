@@ -1,3 +1,46 @@
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'p') {
+        showPopup();
+    }
+});
+
+function showPopup() {
+    // Créer la pop-up si elle n'existe pas déjà
+    const popup = document.createElement('div');
+    popup.classList.add('popup');
+    popup.style.position = 'absolute';
+    popup.style.top = `${Math.random() * (window.innerHeight - 200)}px`;
+    popup.style.left = `${Math.random() * (window.innerWidth - 300)}px`;
+
+    // Ajouter le texte et le bouton
+    const heading = document.createElement('h3');
+    heading.textContent = "Vous avez gagné un iPhone!";
+
+    const button = document.createElement('button');
+    button.textContent = "Cliquez pour gagner encore plus!";
+    
+    // Ajouter l'événement au bouton
+    button.addEventListener('click', function() {
+        showPopup(); // Appeler à nouveau la fonction pour créer une nouvelle pop-up
+    });
+    
+    // Ajouter tout à la pop-up
+    popup.appendChild(heading);
+    popup.appendChild(button);
+
+    // Ajouter la pop-up au body
+    document.body.appendChild(popup);
+    
+    // Afficher la pop-up
+    popup.style.display = 'block';
+
+    // Faire disparaître la pop-up après 5 secondes
+    setTimeout(() => {
+        popup.style.display = 'none';
+        document.body.removeChild(popup); // Enlever la pop-up après qu'elle disparaisse
+    }, 5000);
+}
+
 window.onload = function() {
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
@@ -6,7 +49,6 @@ window.onload = function() {
     let mouseY = 0;
 
     let draggedEmail = null; // Email en cours de déplacement
-
     let trashCanX = 100;
     let trashCanY = 100;
 
@@ -16,14 +58,12 @@ window.onload = function() {
     }
 
     function drawTrashCan(x, y) {
-        // Dessiner le corps de la poubelle
         ctx.fillStyle = '#e74c3c';
         ctx.fillRect(x + 16, y + 24, 32, 30);
         ctx.lineWidth = 3;
         ctx.strokeStyle = '#c0392b';
         ctx.strokeRect(x + 16, y + 24, 32, 30);
 
-        // Dessiner le couvercle de la poubelle
         ctx.fillStyle = '#c0392b';
         if (isLidOpen) {
             ctx.fillRect(x + 12, y, 40, 6);
@@ -73,7 +113,6 @@ window.onload = function() {
             ctx.fillStyle = draggedEmail.type === 'normal' ? 'blue' : draggedEmail.type === 'piece_jointe' ? 'red' : 'grey';
             ctx.fillRect(draggedEmail.x, draggedEmail.y, draggedEmail.width, draggedEmail.height);
         }
-
         pollutionGauge.draw(ctx);
     }
 
@@ -128,7 +167,6 @@ window.onload = function() {
 
     function init() {
         setInterval(addEmailPopup, 1500);
-        canvas.addEventListener('click', removeEmail);
         requestAnimationFrame(gameLoop);
     }
 
@@ -144,20 +182,6 @@ window.onload = function() {
                 dy: (Math.random() * 2) + 1,
                 type: randomType
             });
-        }
-    }
-
-    function removeEmail(event) {
-        if (draggedEmail) {
-            // Vérifier si l'email est au-dessus de la poubelle
-            if (checkMouseOverTrashCan(trashCanX, trashCanY, draggedEmail.x + draggedEmail.width / 2, draggedEmail.y + draggedEmail.height / 2)) {
-                totalCO2Deleted += emailTypes[draggedEmail.type];
-                emailPopups = emailPopups.filter(email => email !== draggedEmail);
-                score++;
-                document.getElementById("score").textContent = `Emails supprimés : ${score}`;
-                document.getElementById("co2-deleted").textContent = `CO₂ supprimé : ${totalCO2Deleted.toFixed(1)} g`;
-            }
-            draggedEmail = null; // Réinitialiser le mail en cours de déplacement
         }
     }
 
@@ -205,6 +229,11 @@ window.onload = function() {
             ) {
                 draggedEmail = popup; // Commencer à déplacer cet email
                 emailPopups.splice(i, 1); // Retirer l'email de la liste
+
+                // Vérifiez si l'email est un spam et montrez une popup
+                if (popup.type === 'spam') {
+                    showPopup(); // Afficher la popup
+                }
                 break;
             }
         }
@@ -212,14 +241,17 @@ window.onload = function() {
 
     canvas.addEventListener("mouseup", () => {
         if (draggedEmail) {
-            // Vérifier si l'email est au-dessus de la poubelle et le supprimer
+            // Vérifier si l'email est au-dessus de la poubelle et seulement le supprimer si c'est le cas
             if (checkMouseOverTrashCan(trashCanX, trashCanY, draggedEmail.x + draggedEmail.width / 2, draggedEmail.y + draggedEmail.height / 2)) {
                 totalCO2Deleted += emailTypes[draggedEmail.type];
                 score++;
                 document.getElementById("score").textContent = `Emails supprimés : ${score}`;
                 document.getElementById("co2-deleted").textContent = `CO₂ supprimé : ${totalCO2Deleted.toFixed(1)} g`;
+            } else {
+                // Si l'email n'est pas dans la poubelle, on le remet dans la liste des emails
+                emailPopups.push(draggedEmail);
             }
-            draggedEmail = null; // Réinitialiser le mail en cours de déplacement
+            draggedEmail = null; // Réinitialiser l'email en cours de déplacement
         }
     });
 };
