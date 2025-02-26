@@ -87,26 +87,26 @@ body{
 }
 
 .A1{
-    background-image: url("images/plastique.png");
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/plastique.png');
     background-size: cover;
     background-position: center;
     transition: 0.3s all;
     color: white;
 }
 .A2{
-    background-image: url("images/gaspillage.png");
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/gaspillage.png');
     background-size: cover;
     background-position: center;
     transition: 0.3s all;
 }
 .B1{
-    background-image: url("images/lampe.png");
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/lampe.png');
     background-size: cover;
     background-position: center;
     transition: 0.3s all;
 }
 .B2{
-    background-image: url("images/viande.png");
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/viande.png');
     background-size: cover;
     background-position: center;
     transition: 0.3s all;
@@ -114,7 +114,7 @@ body{
     padding-right: 32px;
 }
 .B3{
-    background-image: url("images/pollution.png");
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/pollution.png');
     background-size: cover;
     background-position: center;
     transition: 0.3s all;
@@ -122,7 +122,7 @@ body{
     padding-right: 32px;
 }
 .B4{
-    background-image: url("images/avion.png");
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/avion.png');
     background-size: cover;
     background-position: center;
     transition: 0.3s all;
@@ -130,13 +130,13 @@ body{
     padding-right: 32px;
 }
 .C1{
-    background-image: url("images/arbres.png");
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/arbres.png');
     background-size: cover;
     background-position: center;
     transition: 0.3s all;
 }
 .C2{
-    background: url("images/chimie.png");
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/chimie.png');
     background-size: cover;
     background-position: center;
     transition: 0.3s all;
