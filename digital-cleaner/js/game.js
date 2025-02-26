@@ -47,6 +47,7 @@ window.onload = function() {
         if (draggedEmail) {
             draggedEmail.x = mouseX - draggedEmail.width / 2;
             draggedEmail.y = mouseY - draggedEmail.height / 2;
+            isLidOpen = checkMouseOverTrashCan(trashCanX, trashCanY, draggedEmail.x + draggedEmail.width / 2, draggedEmail.y + draggedEmail.height / 2);
         } else {
             isLidOpen = checkMouseOverTrashCan(trashCanX, trashCanY, mouseX, mouseY);
         }
