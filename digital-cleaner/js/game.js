@@ -114,8 +114,9 @@ window.onload = function() {
     });
 
     function drawEmail(popup) {
-        ctx.fillStyle = popup.type === 'normal' ? '#3498db' : popup.type === 'piece_jointe' ? '#e74c3c' : '#95a5a6';
-        ctx.strokeStyle = '#2c3e50';
+        ctx.fillStyle = popup.type === 'normal' ? '#2ecc71' :  // Vert pour les normaux
+        popup.type === 'piece_jointe' ? '#f39c12' :  // Orange pour les pièces jointes
+        '#e74c3c'; // Rouge pour les spams
         ctx.lineWidth = 2;
         ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
         ctx.shadowBlur = 4;
