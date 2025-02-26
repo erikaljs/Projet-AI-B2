@@ -1,0 +1,149 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: antiquewhite;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+
+    background-image: url("images/bodyBackground.jpg");
+    background-position: center 100%;
+    background-size: cover;
+}
+
+
+
+
+.solutionsContainerALL{
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 125fr 819fr;
+    column-gap: 32px;
+}
+
+.A{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    row-gap: 32px;
+}
+
+
+.BC{
+    display: grid;
+    grid-template-rows: 582fr 331fr;
+    grid-template-columns: 1fr;
+    row-gap: 32px;
+}
+
+.B{
+    display: grid;
+    grid-template-columns: 700fr 500fr 374fr;
+    column-gap: 32px;
+}
+
+.B0{
+    display: grid;
+    grid-template-rows: 4fr 7fr;
+    row-gap: 32px;
+}
+
+.C{
+    display: grid;
+    grid-template-columns: 330fr 1276fr;
+    column-gap: 32px;
+
+}
+
+.case{
+    background-color: #ffffff;
+    border-radius: 32px;
+    border: 4px solid #ffffff;
+    transform: scale(1);
+    transition: 0.3s all;
+    box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.50);
+    box-sizing: border-box;
+    padding: 16px 16px 0px 16px;
+    font-family: "Futura";
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-shadow: 0px 0px 6px rgba(0, 0, 0, 0.75);
+    color: white;
+    line-height: 20px;
+}
+
+
+
+
+
+.caseImage{
+    background-image: url("images/arbres.png");
+    border-radius: 100%;
+}
+
+.A1{
+    background-image: url("images/plastique.png");
+    background-size: cover;
+    background-position: center;
+    transition: 0.3s all;
+    color: white;
+}
+.A2{
+    background-image: url("images/gaspillage.png");
+    background-size: cover;
+    background-position: center;
+    transition: 0.3s all;
+}
+.B1{
+    background-image: url("images/lampe.png");
+    background-size: cover;
+    background-position: center;
+    transition: 0.3s all;
+}
+.B2{
+    background-image: url("images/viande.png");
+    background-size: cover;
+    background-position: center;
+    transition: 0.3s all;
+    padding-left: 32px;
+    padding-right: 32px;
+}
+.B3{
+    background-image: url("images/pollution.png");
+    background-size: cover;
+    background-position: center;
+    transition: 0.3s all;
+    padding-left: 32px;
+    padding-right: 32px;
+}
+.B4{
+    background-image: url("images/avion.png");
+    background-size: cover;
+    background-position: center;
+    transition: 0.3s all;
+    padding-left: 32px;
+    padding-right: 32px;
+}
+.C1{
+    background-image: url("images/arbres.png");
+    background-size: cover;
+    background-position: center;
+    transition: 0.3s all;
+}
+.C2{
+    background: url("images/chimie.png");
+    background-size: cover;
+    background-position: center;
+    transition: 0.3s all;
+    color: white;
+    padding-left: 64px;
+    padding-right: 64px;
+}
+
+
+.case:hover{
+    transform: scale(1.03);
+    transition: 0.3s all;
+}

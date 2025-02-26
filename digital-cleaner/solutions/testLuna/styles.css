@@ -1,0 +1,87 @@
+body {
+    background-color: #0d1117;
+    color: #39ff14;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#game-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    background-color: #39ff14;
+    color: black;
+    font-size: 1.2em;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #27cc10;
+}
+
+.hud {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 18px;
+    color: #ffffff;
+}
+
+
+canvas { 
+    background: #222; 
+    display: block; 
+    margin: auto; 
+}
+#co2-container { 
+    width: 300px; 
+    background: red; 
+    height: 20px; 
+    margin: 10px auto; 
+    position: relative; 
+}
+#co2-fill { 
+    width: 100%; 
+    height: 100%; 
+    background: green; 
+}
+
+#popup-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+}
+
+.popup {
+    position: absolute;
+    background-color: #1b1b1b;
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    display: none;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.7);
+}
+
+.popup button {
+    margin-top: 10px;
+}

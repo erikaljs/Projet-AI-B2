@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Digital Cleaner Challenge</title>
+
+    <script src="js/popup.js"></script>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Digital Cleaner Challenge</h1>
+        <p id="total-emails">Total d'emails : 0</p>
+        <p id="score">Emails supprimés : 0</p>
+        <p id="co2-deleted">CO₂ supprimé : 0.0 g</p>
+
+        <canvas id="gameCanvas" width="800" height="600">
+            <div id="popup-container"></div>
+        </canvas>
+<!-- Message de fin de jeu -->
+<div id="game-over" class="game-over-message" style="display: none;">
+    GAME OVER ! Essaie encore.
+    <br>
+    <!-- Bouton pour rejouer -->
+    <button id="replayBtn">Rejouer</button>
+    <!-- Bouton pour aller à une autre page -->
+    <button id="redirectBtn">AGIR !</button>
+
+    <button id="solutionButton" href="solutions/solutions.html">S'informer</button>
+</div>
+
+
+    
+    <script src="js/popup.js"></script>
+    <script src="js/game.js"></script>
+    <script>
+        document.getElementById('redirectBtn').addEventListener('click', function() {
+            window.location.href = 'https://www.gmail.com';
+        });
+
+        document.getElementById('solutionButton').addEventListener('click', function() {
+            window.location.href = 'solutions/solutions.html';
+        });
+
+    </script>
+</body>
+</html>

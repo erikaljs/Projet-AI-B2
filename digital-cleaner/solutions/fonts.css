@@ -1,0 +1,55 @@
+
+@font-face {
+    font-family: "Helvetica";
+    src: url(helvetica/HelveticaRegular.otf);
+}
+
+@font-face {
+    font-family: "Helvetica bold";
+    src: url(helvetica/HelveticaBold.otf);
+}
+
+@font-face {
+    font-family: "Helvetica black";
+    src: url(helvetica/HelveticaBoldOblique.ttf)
+}
+
+@font-face {
+    font-family: "Helvetica light";
+    src: url(helvetica/HelveticaLight.otf);
+}
+
+@font-face {
+    font-family: "Helvetica ultralight";
+    src: url(helvetica/HelveticaUltraLight.otf);
+}
+
+@font-face {
+    font-family: "Futura";
+    src: url(ressources/fonts/futura/FuturaMedium.ttf);
+}
+
+@font-face {
+    font-family: "Futura bold";
+    src: url(ressources/fonts/futura/FuturaBoldBold.ttf);
+}
+
+@font-face {
+    font-family: "Futura black";
+    src: url(ressources/fonts/futura/FuturaBlack.ttf);
+}
+
+@font-face {
+    font-family: "Futura light";
+    src: url(ressources/fonts/futura/futuraLight.ttf);
+}
+
+@font-face {
+    font-family: "Futura medium";
+    src: url(ressources/fonts/futura/FuturaMedium.ttf);
+}
+
+@font-face {
+    font-family: "Futura cond";
+    src: url(ressources/fonts/futura/Futura\ Condensed.ttf);
+}
