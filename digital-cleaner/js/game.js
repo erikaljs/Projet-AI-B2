@@ -6,26 +6,14 @@ document.addEventListener('keydown', function(event) {
 
 
 const messages = [
-    "🎉 Vous avez gagné un iPhone !",
-    "🎁 Félicitations ! Cliquez pour réclamer votre cadeau.",
-    "🔥 Vous êtes le 1 000 000ème visiteur !",
-    "📩 Un nouveau message important vous attend.",
-    "⚠️ Votre ordinateur est infecté ! Cliquez ici pour réparer.",
-    "💰 Vous avez débloqué un bonus secret !",
-    "🔒 Votre compte a été compromis ! Vérifiez votre sécurité.",
-    "🚀 Accédez à une offre exclusive, cliquez ici !",
-    "💎 Félicitations, vous avez gagné une carte-cadeau !",
-    "📢 Alerte ! Votre abonnement expire bientôt, renouvelez maintenant !",
-    "🎶 Découvrez les secrets pour devenir riche rapidement !",
-    "📞 Un inconnu veut vous contacter, cliquez ici pour voir qui c'est !",
-    "💻 Votre PC tourne lentement ? Installez cet outil GRATUIT !",
-    "🛒 Code promo exclusif : -90% sur tout !",
-    "🤖 Une intelligence artificielle veut discuter avec vous !",
-    "🛑 ATTENTION : vous avez été sélectionné pour une récompense !",
-    "🚨 Alerte : votre forfait internet est sur le point d'expirer !",
-    "🔔 Vous venez de recevoir une invitation secrète !",
-    "🔮 Votre avenir est écrit, cliquez ici pour le découvrir !",
-    "💥 Une nouvelle opportunité incroyable vous attend !"
+    "🎉 Vous avez gagné un iPhone 48 pro !",
+    "💥 Emilie t'attends à 200m ! Clique pour voir sa localisation ",
+    "💻 Tu t'ennuies ? Elle aussi",
+    "🔥 Prévision météo : Grand soleil sur Bordeaux \n Chat de Sophie : Il pleut chez moi tu viens quand même? !",
+    "📩 Emma célibataire attend ta réponse",,
+    "📢 Macron accusé de détournement de fond : lisez l'article !",
+    "📞 Une inconnue veut vous contacter, cliquez ici pour voir qui c'est !",
+
 ];
 
 function showPopup() {
