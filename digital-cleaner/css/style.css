@@ -15,6 +15,7 @@ canvas {
     background: #222; 
     display: block; 
     margin: auto; 
+    cursor: pointer;
 }
 #co2-container { 
     width: 300px; 
@@ -28,6 +29,13 @@ canvas {
     height: 100%; 
     background: green; 
 }
+
+#score { 
+    font-size: 20px; 
+    font-weight: bold; 
+    margin-top: 10px; 
+}
+
 .popup { 
     position: absolute; 
     background-color: yellow; 

@@ -8,7 +8,7 @@
     
 </head>
 <body>
-    <h1>Digital Cleaner Challenge</h1>
+    <title>Digital Cleaner Challenge</title>
     <div id="co2-container">
         <div id="co2-fill"></div>
     </div>
@@ -19,5 +19,15 @@
 
     <!-- Lien vers le fichier JavaScript -->
     <script src="popup.js"></script>
+
+</head>
+<body>
+    <h1>Digital Cleaner Challenge</h1>
+    <p id="score">Emails supprimés : 0</p>
+    <p id="co2-deleted">CO₂ supprimé : 0.0 g</p>
+
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <p id="game-over">GAME OVER ! Essayez encore.</p>
+    <script src="game.js"></script>
 </body>
 </html>
