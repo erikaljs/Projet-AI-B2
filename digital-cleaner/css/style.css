@@ -3,7 +3,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #0d1117;
+    /* background-color: #0d1117; */
     color: #ffffff;
     display: flex;
     justify-content: center;
@@ -11,6 +11,10 @@ body {
     text-align: center;
 
     overflow: hidden;
+
+    background-image: url("../solutions/images/bodyBackground.jpg");
+    background-position: center 100%;
+    background-size: cover;
 }
 
 /* Conteneur du jeu */
