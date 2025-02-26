@@ -7,6 +7,14 @@ window.onload = function() {
 
     let draggedEmail = null; // Email en cours de déplacement
 
+    let trashCanX = 100;
+    let trashCanY = 100;
+
+    function updateTrashCanPosition() {
+        trashCanX = Math.random() * (canvas.width - 48); // 48 est la largeur de la poubelle
+        trashCanY = Math.random() * (canvas.height - 54); // 54 est la hauteur de la poubelle
+    }
+
     function drawTrashCan(x, y) {
         // Dessiner le corps de la poubelle
         ctx.fillStyle = '#e74c3c';
@@ -40,7 +48,7 @@ window.onload = function() {
             draggedEmail.x = mouseX - draggedEmail.width / 2;
             draggedEmail.y = mouseY - draggedEmail.height / 2;
         } else {
-            isLidOpen = checkMouseOverTrashCan(100, 100, mouseX, mouseY);
+            isLidOpen = checkMouseOverTrashCan(trashCanX, trashCanY, mouseX, mouseY);
         }
 
         draw();
@@ -53,7 +61,7 @@ window.onload = function() {
 
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        drawTrashCan(100, 100);
+        drawTrashCan(trashCanX, trashCanY);
 
         emailPopups.forEach(popup => {
             ctx.fillStyle = popup.type === 'normal' ? 'blue' : popup.type === 'piece_jointe' ? 'red' : 'grey';
@@ -141,7 +149,7 @@ window.onload = function() {
     function removeEmail(event) {
         if (draggedEmail) {
             // Vérifier si l'email est au-dessus de la poubelle
-            if (checkMouseOverTrashCan(100, 100, draggedEmail.x + draggedEmail.width / 2, draggedEmail.y + draggedEmail.height / 2)) {
+            if (checkMouseOverTrashCan(trashCanX, trashCanY, draggedEmail.x + draggedEmail.width / 2, draggedEmail.y + draggedEmail.height / 2)) {
                 totalCO2Deleted += emailTypes[draggedEmail.type];
                 emailPopups = emailPopups.filter(email => email !== draggedEmail);
                 score++;
@@ -180,6 +188,8 @@ window.onload = function() {
 
     init();
 
+    setInterval(updateTrashCanPosition, 5000); // Mettre à jour la position de la poubelle toutes les 5 secondes
+
     // Gestion du "drag" des emails
     canvas.addEventListener("mousedown", (e) => {
         const rect = canvas.getBoundingClientRect();
@@ -202,7 +212,7 @@ window.onload = function() {
     canvas.addEventListener("mouseup", () => {
         if (draggedEmail) {
             // Vérifier si l'email est au-dessus de la poubelle et le supprimer
-            if (checkMouseOverTrashCan(100, 100, draggedEmail.x + draggedEmail.width / 2, draggedEmail.y + draggedEmail.height / 2)) {
+            if (checkMouseOverTrashCan(trashCanX, trashCanY, draggedEmail.x + draggedEmail.width / 2, draggedEmail.y + draggedEmail.height / 2)) {
                 totalCO2Deleted += emailTypes[draggedEmail.type];
                 score++;
                 document.getElementById("score").textContent = `Emails supprimés : ${score}`;
