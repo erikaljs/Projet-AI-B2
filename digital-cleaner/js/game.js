@@ -60,18 +60,45 @@ window.onload = function() {
         draw();
     });
 
+    function drawEmail(popup) {
+        ctx.fillStyle = popup.type === 'normal' ? '#3498db' : popup.type === 'piece_jointe' ? '#e74c3c' : '#95a5a6';
+        ctx.strokeStyle = '#2c3e50';
+        ctx.lineWidth = 2;
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+        ctx.shadowBlur = 4;
+        ctx.shadowOffsetX = 2;
+        ctx.shadowOffsetY = 2;
+        ctx.beginPath();
+        ctx.moveTo(popup.x + 10, popup.y);
+        ctx.lineTo(popup.x + popup.width - 10, popup.y);
+        ctx.quadraticCurveTo(popup.x + popup.width, popup.y, popup.x + popup.width, popup.y + 10);
+        ctx.lineTo(popup.x + popup.width, popup.y + popup.height - 10);
+        ctx.quadraticCurveTo(popup.x + popup.width, popup.y + popup.height, popup.x + popup.width - 10, popup.y + popup.height);
+        ctx.lineTo(popup.x + 10, popup.y + popup.height);
+        ctx.quadraticCurveTo(popup.x, popup.y + popup.height, popup.x, popup.y + popup.height - 10);
+        ctx.lineTo(popup.x, popup.y + 10);
+        ctx.quadraticCurveTo(popup.x, popup.y, popup.x + 10, popup.y);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+        ctx.shadowColor = 'transparent'; // Désactiver l'ombre pour les autres éléments
+
+        // Dessiner l'icône d'enveloppe
+        ctx.fillStyle = 'white';
+        ctx.font = '16px Arial';
+        ctx.fillText('✉️', popup.x + 15, popup.y + 20);
+    }
+
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawTrashCan(trashCanX, trashCanY);
 
         emailPopups.forEach(popup => {
-            ctx.fillStyle = popup.type === 'normal' ? 'blue' : popup.type === 'piece_jointe' ? 'red' : 'grey';
-            ctx.fillRect(popup.x, popup.y, popup.width, popup.height);
+            drawEmail(popup);
         });
 
         if (draggedEmail) {
-            ctx.fillStyle = draggedEmail.type === 'normal' ? 'blue' : draggedEmail.type === 'piece_jointe' ? 'red' : 'grey';
-            ctx.fillRect(draggedEmail.x, draggedEmail.y, draggedEmail.width, draggedEmail.height);
+            drawEmail(draggedEmail);
         }
 
         pollutionGauge.draw(ctx);
