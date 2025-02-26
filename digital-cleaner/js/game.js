@@ -9,22 +9,11 @@ const messages = [
     "🎉 Vous avez gagné un iPhone 48 pro !",
     "💥 Emilie t'attends à 200m ! Clique pour voir sa localisation ",
     "💻 Tu t'ennuies ? Elle aussi",
-    "🎁 Félicitations ! Cliquez pour réclamer votre cadeau.",
     "🔥 Prévision météo : Grand soleil sur Bordeaux \n Chat de Sophie : Il pleut chez moi tu viens quand même? !",
-    "📩 Emma célibataire attend ta réponse",
-    "⚠️ Votre ordinateur est infecté ! Cliquez ici pour réparer.",
-    "💰 Vous avez gagné 500EUROS !",
-    "🔒 Virus détecté. Vérifiez votre sécurité.",
-    "🚀 Envie de participer au Projet SpaceX ? Inscris toi!",
-    "💎 Destockage profitez dès maintenant !",
+    "📩 Emma célibataire attend ta réponse",,
     "📢 Macron accusé de détournement de fond : lisez l'article !",
     "📞 Une inconnue veut vous contacter, cliquez ici pour voir qui c'est !",
-    "🛒 Code promo exclusif : -90% sur tout !",
-    "🤖 Une intelligence artificielle veut discuter avec vous !",
-    "🛑 ATTENTION : vous avez été sélectionné pour une récompense !",
-    "🚨 Alerte : votre forfait internet est sur le point d'expirer !",
-    "🔔 Vous venez de recevoir une invitation secrète !",
-    "🔮 Votre avenir est écrit, cliquez ici pour le découvrir !",
+
 ];
 
 function showPopup() {
