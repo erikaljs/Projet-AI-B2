@@ -192,10 +192,7 @@ window.onload = function() {
 
     const pollutionGauge = new PollutionGauge(maxPollutionLevel);
 
-    function init() {
-        setInterval(addEmailPopup, 1500);
-        requestAnimationFrame(gameLoop);
-    }
+    let totalEmails = 0;
 
     function addEmailPopup() {
         if (!gameOver) {
@@ -209,7 +206,14 @@ window.onload = function() {
                 dy: (Math.random() * 2) + 1,
                 type: randomType
             });
+            totalEmails++;
+            document.getElementById("total-emails").textContent = `Total d'emails : ${totalEmails}`;
         }
+    }
+
+    function init() {
+        setInterval(addEmailPopup, 1500);
+        requestAnimationFrame(gameLoop);
     }
 
     function update() {
